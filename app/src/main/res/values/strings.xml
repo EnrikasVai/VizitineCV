@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">VizitineCV</string>
+    <string name="affirmation1">PAV1</string>
+    <string name="affirmation2">PAV2</string>
+    <string name="affirmation3">PAV3</string>
+    <string name="affirmation4">PAV4</string>
+    <string name="affirmation1.1">Aprasymas1</string>
+    <string name="affirmation2.2">Aprasymas2</string>
+    <string name="affirmation3.3">Aprasymas3</string>
+    <string name="affirmation4.4">Aprasymas4</string>
+    <string name="MyName">Enrikas Vaičiulis</string>
+    <string name="MyEmail">enrikas1010@gmail.com</string>
+    <string name="view_cv">View CV</string>
+    <string name="portfolio">Portfolio</string>
+    <string name="contact_me">Contact Me</string>
+    <string name="qr">QR</string>
+</resources>
