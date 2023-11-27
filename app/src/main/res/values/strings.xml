@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">VizitineCV</string>
-    <string name="affirmation1">PAV1</string>
-    <string name="affirmation2">PAV2</string>
-    <string name="affirmation3">PAV3</string>
-    <string name="affirmation4">PAV4</string>
-    <string name="affirmation1.1">Aprasymas1</string>
-    <string name="affirmation2.2">Aprasymas2</string>
-    <string name="affirmation3.3">Aprasymas3</string>
-    <string name="affirmation4.4">Aprasymas4</string>
+    <string name="affirmation1">Azutine</string>
+    <string name="affirmation2">Juliana Silva</string>
+    <string name="affirmation3">Thynk Unlimited</string>
+    <string name="affirmation4">Developers</string>
+    <string name="affirmation1.1">Logo</string>
+    <string name="affirmation2.2">Logo</string>
+    <string name="affirmation3.3">Logo</string>
+    <string name="affirmation4.4">Logo</string>
     <string name="MyName">Enrikas Vaičiulis</string>
     <string name="MyEmail">enrikas1010@gmail.com</string>
     <string name="view_cv">View CV</string>
@@ -46,4 +46,7 @@
     <string name="enter_your_note">Enter your note</string>
     <string name="save_note">Save note</string>
     <string name="add_note">Add note</string>
+    <string name="english">English</string>
+    <string name="lithuanian">Lithuanian</string>
+    <string name="select_language">Select Language</string>
 </resources>

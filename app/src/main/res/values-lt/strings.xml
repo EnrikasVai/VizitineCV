@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">VizitineCV</string>
-    <string name="affirmation1">PAV1</string>
-    <string name="affirmation2">PAV2</string>
-    <string name="affirmation3">PAV3</string>
-    <string name="affirmation4">PAV4</string>
-    <string name="affirmation1.1">Aprasymas1</string>
-    <string name="affirmation2.2">Aprasymas2</string>
-    <string name="affirmation3.3">Aprasymas3</string>
-    <string name="affirmation4.4">Aprasymas4</string>
+    <string name="affirmation1">Azutine</string>
+    <string name="affirmation2">Juliana Silva</string>
+    <string name="affirmation3">Thynk Unlimited</string>
+    <string name="affirmation4">Developers</string>
+    <string name="affirmation1.1">Logotipas</string>
+    <string name="affirmation2.2">Logotipas</string>
+    <string name="affirmation3.3">Logotipas</string>
+    <string name="affirmation4.4">Logotipas</string>
     <string name="MyName">Enrikas Vaičiulis</string>
     <string name="MyEmail">enrikas1010@gmail.com</string>
     <string name="view_cv">Peržiūrėti CV</string>
     <string name="portfolio">Portfolio</string>
-    <string name="contact_me">Susisiekite Su Manimi</string>
+    <string name="contact_me">Susisiekite</string>
     <string name="qr">QR</string>
     <string name="send_email">Siųsti E.laišką</string>
     <string name="message">Žinutė</string>
     <string name="subject">Tema</string>
     <string name="name">Vardas</string>
     <string name="qr_code">QR Kodas</string>
-    <string name="scan_me_to_get_the_app">Skanuok mane, jog atsisūsti</string>
+    <string name="scan_me_to_get_the_app">Skenuok mane, jog atsisūsti</string>
     <string name="qr_scan_me">QR SKANUOK MANE</string>
-    <string name="logo_portfolio">Logo Portfolio</string>
+    <string name="logo_portfolio">Logotipų Portfolio</string>
     <string name="home">PRADINIS</string>
     <string name="cv">CV</string>
     <string name="basic_information">Bazinė informacija</string>
@@ -41,10 +41,13 @@
     <string name="administrator">Administratorius</string>
     <string name="adminBio">2020 - iki dabar</string>
     <string name="skills">Įgudžiai</string>
-    <string name="graphic_design">Grafikos Dizainos</string>
+    <string name="graphic_design">Grafikos Dizainas</string>
     <string name="mobile_development">Mobilios Aplikacijos</string>
     <string name="notes">Užrašai</string>
     <string name="enter_your_note">Įveskite užrašą</string>
     <string name="save_note">Išsaugoti užrašą</string>
     <string name="add_note">Pridėti užrašą</string>
+    <string name="english">Anglų</string>
+    <string name="lithuanian">Lietuvių</string>
+    <string name="select_language">Pasirinkti Kalbą</string>
 </resources>

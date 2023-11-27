@@ -3,6 +3,7 @@ package com.example.vizitinecv
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -29,7 +30,7 @@ class MainActivity : ComponentActivity() {
                     startDestination = "screen1"
                 ) {
                     composable("screen1") {
-                        HomeScreen(navController = navController)
+                        HomeScreen(navController = navController, activity = LocalContext.current as ComponentActivity)
                     }
                     composable("screen2") {
                         CVScreen(navController = navController, appPreferences = appPreferences)
