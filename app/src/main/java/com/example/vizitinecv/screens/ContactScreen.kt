@@ -1,6 +1,11 @@
 package com.example.vizitinecv.screens
 
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.widget.Toast
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,7 +22,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -27,27 +32,35 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.vizitinecv.R
 import com.example.vizitinecv.data.ContactFormData
+import com.example.vizitinecv.ui.theme.Blue
+
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ContactScreen(navController: NavHostController) {
-    var formData by remember { mutableStateOf(ContactFormData("", "", "", "")) }
-    var isEmailValid by remember { mutableStateOf(true) }
+    var formData by remember { mutableStateOf(ContactFormData("", "", "")) }
+    var nameError by remember { mutableStateOf(false) }
+    var subjectError by remember { mutableStateOf(false) }
+    var messageError by remember { mutableStateOf(false) }
+    val context = LocalContext.current // Access the LocalContext
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Contact Me") },
+                title = { Text(stringResource(R.string.contact_me), color = Color.White) },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                    containerColor = MaterialTheme.colorScheme.primary
                 ),
                 navigationIcon = {
                     IconButton(onClick = { navController.navigateUp() }) {
-                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null)
+                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null, tint = Color.White)
                     }
                 }
             )
@@ -64,60 +77,69 @@ fun ContactScreen(navController: NavHostController) {
 
                 item {
                     // Form fields with validation
-                    TextField(
+                    OutlinedTextField(
                         value = formData.name,
-                        onValueChange = { formData = formData.copy(name = it) },
-                        label = { Text("Name") },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 8.dp)
-                    )
-
-                    TextField(
-                        value = formData.subject,
-                        onValueChange = { formData = formData.copy(subject = it) },
-                        label = { Text("Subject") },
+                        onValueChange = {
+                            formData = formData.copy(name = it)
+                            nameError = it.isBlank()
+                        },
+                        colors = TextFieldDefaults.outlinedTextFieldColors(
+                            focusedBorderColor = if (nameError) Color.Red else Blue,
+                            unfocusedBorderColor = if (nameError) Color.Red else Color.Gray
+                        ),
+                        label = { Text(stringResource(R.string.name)) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(bottom = 8.dp)
                     )
 
                     OutlinedTextField(
-                        value = formData.email,
+                        value = formData.subject,
                         onValueChange = {
-                            formData = formData.copy(email = it)
-                            isEmailValid = android.util.Patterns.EMAIL_ADDRESS.matcher(it).matches()
+                            formData = formData.copy(subject = it)
+                            subjectError = it.isBlank()
                         },
-                        label = { Text("Email") },
-                        isError = !isEmailValid,
+                        colors = TextFieldDefaults.outlinedTextFieldColors(
+                            focusedBorderColor = if (subjectError) Color.Red else Blue,
+                            unfocusedBorderColor = if (subjectError) Color.Red else Color.Gray
+                        ),
+                        label = { Text(stringResource(R.string.subject)) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(bottom = 8.dp)
                     )
 
-                    TextField(
+                    OutlinedTextField(
                         value = formData.message,
-                        onValueChange = { formData = formData.copy(message = it) },
-                        label = { Text("Message") },
+                        onValueChange = {
+                            formData = formData.copy(message = it)
+                            messageError = it.isBlank()
+                        },
+                        colors = TextFieldDefaults.outlinedTextFieldColors(
+                            focusedBorderColor = if (messageError) Color.Red else Blue,
+                            unfocusedBorderColor = if (messageError) Color.Red else Color.Gray
+                        ),
+                        label = { Text(stringResource(R.string.message)) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(bottom = 8.dp)
                     )
-                }
-
-                item {
-                    // Validation messages
-                    if (!isEmailValid) {
-                        Text("Invalid email format", color = Color.Red)
-                    }
                 }
 
                 item {
                     // Submit button with validation
                     Button(
                         onClick = {
+                            nameError = formData.name.isBlank()
+                            subjectError = formData.subject.isBlank()
+                            messageError = formData.message.isBlank()
+
                             if (isFormValid(formData)) {
-                                sendEmail(formData)
+                                sendEmail(formData, context)
+                                formData = ContactFormData("", "", "")
+                            } else {
+                                // Show error message using Toast
+                                Toast.makeText(context, "Please fill in all fields", Toast.LENGTH_SHORT).show()
                             }
                         },
                         modifier = Modifier
@@ -125,7 +147,7 @@ fun ContactScreen(navController: NavHostController) {
                             .height(50.dp)
                             .padding(top = 8.dp)
                     ) {
-                        Text("Submit")
+                        Text(stringResource(R.string.send_email))
                     }
                 }
             }
@@ -136,17 +158,22 @@ fun ContactScreen(navController: NavHostController) {
 private fun isFormValid(formData: ContactFormData): Boolean {
     return formData.name.isNotBlank() &&
             formData.subject.isNotBlank() &&
-            formData.email.isNotBlank() &&
-            android.util.Patterns.EMAIL_ADDRESS.matcher(formData.email).matches() &&
             formData.message.isNotBlank()
 }
 
 // Placeholder function for sending the email
-private fun sendEmail(formData: ContactFormData) {
-    // Implement your email sending logic here
-    println("Sending email to enrikas1010@gmail.com:")
-    println("Name: ${formData.name}")
-    println("Subject: ${formData.subject}")
-    println("Email: ${formData.email}")
-    println("Message: ${formData.message}")
+private fun sendEmail(formData: ContactFormData, context: Context) {
+    val emailIntent = Intent(Intent.ACTION_SENDTO)
+    emailIntent.data = Uri.parse("mailto:") // This ensures only email apps respond
+
+    emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf("enrikas1010@gmail.com")) // Replace with your recipient email address
+    emailIntent.putExtra(Intent.EXTRA_SUBJECT, formData.subject)
+    emailIntent.putExtra(Intent.EXTRA_TEXT, "I'm: ${formData.name}\n\n ${formData.message}")
+
+    try {
+        context.startActivity(emailIntent)
+
+    } catch (e: ActivityNotFoundException) {
+        Toast.makeText(context, "No email client found", Toast.LENGTH_SHORT).show()
+    }
 }

@@ -32,7 +32,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -48,14 +47,19 @@ fun HomeScreen(navController: NavHostController) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("My CV App") },
+                title = {
+                    Text (
+                        text = stringResource(R.string.home),
+                        color = Color.White
+                    )
+                },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                    containerColor = MaterialTheme.colorScheme.primary
                 ),
                 navigationIcon = {
                     if (navController.currentBackStackEntry?.destination?.route != "screen1") {
                         IconButton(onClick = { navController.navigateUp() }) {
-                            Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null)
+                            Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null, tint = Color.White)
                         }
                     }
                 },
@@ -67,8 +71,9 @@ fun HomeScreen(navController: NavHostController) {
                     .fillMaxSize()
                     .padding(16.dp)
                     .padding(top = 60.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                ) {
                 item {
                     // Display photo
                     Image(
@@ -86,8 +91,8 @@ fun HomeScreen(navController: NavHostController) {
 
                 item {
                     // Display name and email
-                    Text(text = stringResource(R.string.MyName), fontWeight = FontWeight.Bold, fontSize = 18.sp)
-                    Text(text = stringResource(R.string.MyEmail), color = Color.Gray)
+                    Text(text = stringResource(R.string.MyName), fontWeight = FontWeight.Bold, fontSize = 18.sp, color = Color.Black)
+                    Text(text = stringResource(R.string.MyEmail), color = Color.DarkGray)
                 }
 
                 item {
@@ -107,7 +112,7 @@ fun HomeScreen(navController: NavHostController) {
                                 .padding(4.dp)
                                 .size(150.dp)
                                 .background(
-                                    MaterialTheme.colorScheme.primaryContainer,
+                                    MaterialTheme.colorScheme.tertiary,
                                     shape = MaterialTheme.shapes.medium
                                 )
                                 .clickable { navController.navigate("screen2") },
@@ -117,7 +122,7 @@ fun HomeScreen(navController: NavHostController) {
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.Center
                             ) {
-                                Icon(imageVector = Icons.Default.Person, contentDescription = null)
+                                Icon(imageVector = Icons.Default.Person, contentDescription = null, tint = Color.Black)
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Text(text = stringResource(R.string.view_cv))
                             }
@@ -129,7 +134,7 @@ fun HomeScreen(navController: NavHostController) {
                                 .padding(4.dp)
                                 .size(150.dp)
                                 .background(
-                                    MaterialTheme.colorScheme.primaryContainer,
+                                    MaterialTheme.colorScheme.tertiary,
                                     shape = MaterialTheme.shapes.medium
                                 )
                                 .clickable { navController.navigate("screen4") },
@@ -164,7 +169,7 @@ fun HomeScreen(navController: NavHostController) {
                                 .padding(4.dp)
                                 .size(150.dp)
                                 .background(
-                                    MaterialTheme.colorScheme.primaryContainer,
+                                    MaterialTheme.colorScheme.tertiary,
                                     shape = MaterialTheme.shapes.medium
                                 )
                                 .clickable { navController.navigate("screen3") },
@@ -190,7 +195,7 @@ fun HomeScreen(navController: NavHostController) {
                                 .padding(4.dp)
                                 .size(150.dp)
                                 .background(
-                                    MaterialTheme.colorScheme.primaryContainer,
+                                    MaterialTheme.colorScheme.tertiary,
                                     shape = MaterialTheme.shapes.medium
                                 )
                                 .clickable { navController.navigate("screen5") },
